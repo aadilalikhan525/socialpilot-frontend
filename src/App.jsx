@@ -4,6 +4,7 @@ import { ToastProvider } from './context/ToastContext'
 import AppLayout from './components/layout/AppLayout'
 import LoadingState from './components/ui/LoadingState'
 
+import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
@@ -56,6 +57,9 @@ export default function App() {
       <ToastProvider>
         <AuthProvider>
           <Routes>
+            {/* Public Landing Page */}
+            <Route path="/" element={<LandingPage />} />
+
             {/* Public Auth Routes */}
             <Route
               path="/login"
@@ -82,10 +86,10 @@ export default function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/posts" element={<Posts />} />
               <Route path="/create" element={<CreatePost />} />
+              <Route path="/create-post" element={<CreatePost />} />
               <Route path="/posts/:id/edit" element={<EditPost />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/social-accounts" element={<SocialAccounts />} />
@@ -93,7 +97,7 @@ export default function App() {
             </Route>
 
             {/* Fallback */}
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </AuthProvider>
       </ToastProvider>
